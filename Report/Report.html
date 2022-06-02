@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Assignment 2 - Design and Analysis of Algorithms </h1>
+
+<h2>Objective: </h2>
+<p>The objective of this assignment is to implement the RNA secondary structure prediction 
+    algorithm. </p>
+
+<h2>Introduction: </h2>
+<p>The code focuses on implementing the dynamic programming algorithm to solve the Computational Biology Problem - Given an RNA Molecule, predict its secondary structure.</p>
+
+<h2>Methodology: </h2>
+<p> Object Oriented Language C++ has been used for this assignment. Any kind of library functions or STL classes have not been used. The implementation was done ensuring that all the constraints of secondary structures are addressed.</p>
+<h4>Constraints in the algorithm:</h4>
+<ul>
+    <li>Pairs of bases match up: 'A' matches only with 'U' (and vise versa) and 'G' matches only with 'C'. </li>
+    <li>Any secondary structure on the RNA molecule B: b1 b2 ... bn is a set of pairs {(i,j)} where i >= 1, j &lt;= n and satisfies the following rules: </li>
+    <ul>
+        <li>
+            No Kinks (Sharp Turns) - The ends of each pair are separated by >=4 inverting bases, i.e., if (i,j) belong to the set S, then i &lt;= j-1. 
+        </li>
+        <li>
+            S is a matching pair, i.e., no base appears in more than one pair. 
+        </li>
+        <li>
+            There does not exist any pairs, i.e., if (i, j) and (k, l) belong to the set S, then, we can not have i &lt; k&lt; j&lt; l.  
+        </li>
+    </ul>
+</ul>
+
+<h4>Dynamic Programming: </h4>
+<p>Define OPT(i,j) as the maximum number of base pairs for bi...bj. Initialize OPT(i,j)=0 if i>=j-4. In the optimal secondary structure on b1 b2... bj:</p>
+<ul>
+    <li>
+        If j is not in any pair, use OPT(i, j-1).
+    </li>
+    <li>
+        If j pairs with some t&lt;j-4, the knot condition yields two independent sub problems - OPT(i, t-1) and OPT(t+1, j-1).
+    </li>
+</ul>
+
+
+<h4>Challenge: </h4>
+<p>How to order from smallest to largest sub-problems? Computing OPT(i,j) involves sub-problems OPT(1,m) where m-l&gt;j-i. This helps us arrange the sub-problems from smallest to largest order. </p>
+
+
+<h4>Recurrence Relation: </h4>
+<p>OPT(i,j) = maximum{ OPT(i,j-1), maximum over t{1+OPT(i,t-1)+OPT(t+1,j-1)} }</p>
+
+
+
+<h4>Pseudo Code:</h4>
+<ol>
+    <li>Initialize OPT(i,j)=0 for all i>=j-4</li>
+    <li>For k = 5,6,...,n-1:</li>
+    <li>&nbsp;&nbsp;For i = 1,2,...,n-k:</li>
+    <li>&nbsp;&nbsp;&nbsp;&nbsp;Set j=i+k</li>
+    <li>&nbsp;&nbsp;&nbsp;&nbsp;Compute OPT(i,j) using the recurrence</li>
+    <li>&nbsp;&nbsp;End-For</li>
+    <li>End-For</li>
+    <li>Return OPT(1,n)</li>
+</ol>
+
+
+<h4>Time Complexity:</h4>
+<p>Here, we have O(n^2) sub-problems. A two-dimensional table (array) is built to store the optimal values of each sub-problems and a nested-for-loop is used for computation. Hence, the time complexity of the algorithm is O(n^2).</p>
+
+
+
+<h4>C++ Code Explaination:</h4>
+<ol>
+    <li>
+        <b>int check_pair(char a, char b)</b>: A function to check whether the given base pairs (a,b) can be matched based on Constraint 1 above. It returns 1 if pairing is possible. If not, 0 is returned. 
+    </li>
+    <li>
+        <b>int OPT(int i, int j)</b>: A recursive function to traverse through the RNA sequence and count the total number of pairs of bases possible. The problem is divided recursively into multiple sub-problems as mentioned above and the variable 'paired' stores the maximum number of pairs possible in the given set of sub-problems. This value is compared to the case where the j'th RNA character does not form a pair and the maximum of the two values is taken. The function returns number of bases pairs possible within the sequence starting from i and ending at j.
+    </li>
+    <li>
+        <b>int init(string s)</b>: Function to initialise the Memoization matrix and to remove white spaces if any from the input squence.
+    </li>
+    <li>
+        <b>int main()</b>: Main function of the program that takes in the input, calls the other user defined functions, and returns 0 if the program runs successfully. 
+    </li>
+</ol>
+
+
+
+
+
+<h2>Sample Outputs and Running Time (Graphs):</h2>
+
+<p>Input: GGUCUGCUAUUUCUAUUUACGUUUUAGUACUCUGGAAACAGAAUCUACUAAAACAAGGCAAAAUGCCGUGUUUAUCUCGU Output: 26 Runtime: 1024ms</p>
+<img src="1.png"> 
+<p>Input: UCUCUGGUUAGGAAACUAACUAGGGA Output: 9 Runtime: 117ms</p>
+<img src="2.png"> 
+<p>Input: GCCUGGAGCGC Output: 3 Runtime: 44ms</p>
+<img src="3.png"> 
+<p>Input: GGCGAAGAACGGGGAGCC Output: 4 Runtime: 59ms</p>
+<img src="4.png"> 
+<p>Input: CUGUGAAUG Output: 2 Runtime: 50ms</p>
+<img src="5.png"> 
+<p>Input: UUGCGUCGCGUCGACGAAGUCGC Output: 6 Runtime: 76ms</p>
+<img src="6.png" > 
+<p>Graph of Test Case Number v/s Run Time: </p>
+<img src="7.png" width="800" height="200"> 
+</body>
+</html>

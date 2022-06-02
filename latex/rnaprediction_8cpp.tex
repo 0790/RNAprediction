@@ -1,0 +1,169 @@
+\doxysection{C\+:/\+Users/\+Deepti/\+Desktop/\+DAACodes/rnaprediction.cpp File Reference}
+\label{rnaprediction_8cpp}\index{C:/Users/Deepti/Desktop/DAACodes/rnaprediction.cpp@{C:/Users/Deepti/Desktop/DAACodes/rnaprediction.cpp}}
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Print}
+\begin{DoxyCompactList}\small\item\em Structure to store the pair of valid bases. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ check\+\_\+pair} (char a, char b)
+\begin{DoxyCompactList}\small\item\em A function to check whether the given base pair is possible or not based on rule 2 and 3. \end{DoxyCompactList}\item 
+int \textbf{ check\+\_\+exists} (int i)
+\begin{DoxyCompactList}\small\item\em Function to check if basis is already in a pair, according to rule 1. \end{DoxyCompactList}\item 
+int \textbf{ OPT} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Recursive function to traverse through the sequence and check the total number of pairs of bases possible based on the rules. \end{DoxyCompactList}\item 
+int \textbf{ init} (string s)
+\begin{DoxyCompactList}\small\item\em Function to initialise the Memoization matrix and to remove white spaces if any from the input squence. \end{DoxyCompactList}\item 
+void \textbf{ traceback} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Fucntion to get the pairs of basis from the calculated maximum. \end{DoxyCompactList}\item 
+int \textbf{ main} ()
+\begin{DoxyCompactList}\small\item\em main function of the program, takes the RNA sequence as input annd calls the init and OPT function to calculae the number of pairs \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{rnaprediction_8cpp_a89606eca6b563ec68d2da2e84657736f}} 
+int {\bfseries l}
+\item 
+\mbox{\label{rnaprediction_8cpp_a1e87fe3e04df5be46259be83cf4bb564}} 
+char {\bfseries seq} [100]
+\item 
+\mbox{\label{rnaprediction_8cpp_afa914ab5cd4bc8859918ec46c0bd13e0}} 
+\textbf{ Print} {\bfseries printvalues} [100]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Authors}
+Deepti Kumar (2018B5\+A70790H), Eva Tiwari (2018B5\+A70816H), Shreya Srirampur (2018B4\+A70886H), Anirudh A (2018B4\+A70936)
+\end{DoxyAuthor}
+\doxysubsection{DESCRIPTION}\label{rnaprediction_8cpp_DESCRIPTION}
+The following program takes a character array representing the RNA sequence as input and prints the number of bases pairs that are present in the secondary structure of the sequence. Rules for forming bases pairs are as follows\+:
+\begin{DoxyEnumerate}
+\item Pairs of bases match up; Each base matches with 1 other base.
+\item Adenine always matches with Uracil.
+\item Cytosine always matches with Guanine.
+\item There are no kinks in the folded molecule.
+\item Structures are knot-\/free.
+\item No sharp turns allowed 
+\end{DoxyEnumerate}
+
+\doxysubsection{Function Documentation}
+\mbox{\label{rnaprediction_8cpp_a2091cba2e5a2f534dd6fed9616012552}} 
+\index{rnaprediction.cpp@{rnaprediction.cpp}!check\_exists@{check\_exists}}
+\index{check\_exists@{check\_exists}!rnaprediction.cpp@{rnaprediction.cpp}}
+\doxysubsubsection{check\_exists()}
+{\footnotesize\ttfamily int check\+\_\+exists (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Function to check if basis is already in a pair, according to rule 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & index of the current basis \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int value is 1 if already in a pair, else 0 
+\end{DoxyReturn}
+\mbox{\label{rnaprediction_8cpp_a8ddd26e7bdb2ba88481c4a639b7b71e0}} 
+\index{rnaprediction.cpp@{rnaprediction.cpp}!check\_pair@{check\_pair}}
+\index{check\_pair@{check\_pair}!rnaprediction.cpp@{rnaprediction.cpp}}
+\doxysubsubsection{check\_pair()}
+{\footnotesize\ttfamily int check\+\_\+pair (\begin{DoxyParamCaption}\item[{char}]{a,  }\item[{char}]{b }\end{DoxyParamCaption})}
+
+
+
+A function to check whether the given base pair is possible or not based on rule 2 and 3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Base at location t-\/1 in loop ~\newline
+ \\
+\hline
+{\em b} & Base at location j-\/1 in loop \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int value is 1 if the basis form a pair, else 0 
+\end{DoxyReturn}
+\mbox{\label{rnaprediction_8cpp_a0f4c825dff831dc5e5344b122eb016a1}} 
+\index{rnaprediction.cpp@{rnaprediction.cpp}!init@{init}}
+\index{init@{init}!rnaprediction.cpp@{rnaprediction.cpp}}
+\doxysubsubsection{init()}
+{\footnotesize\ttfamily int init (\begin{DoxyParamCaption}\item[{string}]{s }\end{DoxyParamCaption})}
+
+
+
+Function to initialise the Memoization matrix and to remove white spaces if any from the input squence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Input sequence with or without spaces ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The length of the sequence without spaces 
+\end{DoxyReturn}
+\mbox{\label{rnaprediction_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{rnaprediction.cpp@{rnaprediction.cpp}!main@{main}}
+\index{main@{main}!rnaprediction.cpp@{rnaprediction.cpp}}
+\doxysubsubsection{main()}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+main function of the program, takes the RNA sequence as input annd calls the init and OPT function to calculae the number of pairs 
+
+\begin{DoxyReturn}{Returns}
+int returns 0 if the run is successful. 
+\end{DoxyReturn}
+\mbox{\label{rnaprediction_8cpp_a49e29890b9bafcefd21bc6a0f7118252}} 
+\index{rnaprediction.cpp@{rnaprediction.cpp}!OPT@{OPT}}
+\index{OPT@{OPT}!rnaprediction.cpp@{rnaprediction.cpp}}
+\doxysubsubsection{OPT()}
+{\footnotesize\ttfamily int OPT (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Recursive function to traverse through the sequence and check the total number of pairs of bases possible based on the rules. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the start of the sequrnce under consideration \\
+\hline
+{\em j} & Index of the end of the sequence under consideration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int number of bases pairs possible within the sequence starting from i and ending at j 
+\end{DoxyReturn}
+\mbox{\label{rnaprediction_8cpp_ac8b59f0643b497d5c26a68e63e4297c8}} 
+\index{rnaprediction.cpp@{rnaprediction.cpp}!traceback@{traceback}}
+\index{traceback@{traceback}!rnaprediction.cpp@{rnaprediction.cpp}}
+\doxysubsubsection{traceback()}
+{\footnotesize\ttfamily void traceback (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Fucntion to get the pairs of basis from the calculated maximum. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the start of the sequrnce under consideration \\
+\hline
+{\em j} & Index of the end of the sequence under consideration \\
+\hline
+{\em l} & The length of the structure printvalues with the valid base pairs \\
+\hline
+\end{DoxyParams}
